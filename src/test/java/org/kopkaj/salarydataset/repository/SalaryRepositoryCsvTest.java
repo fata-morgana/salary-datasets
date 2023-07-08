@@ -67,7 +67,7 @@ public class SalaryRepositoryCsvTest {
         assertEquals("iOS Developer", dataset.jobTitle());
         assertEquals(new BigDecimal("0.8"), dataset.yearsAtEmployer());
         assertEquals(new BigDecimal("8.0"), dataset.yearsAtExperience());
-        assertEquals(new BigDecimal("0"), dataset.salary()); // actual value is '36.5K USD / YEAR'. it's an edge case and won't worth the time to fix
+        assertEquals(new BigDecimal("36.5"), dataset.salary()); // actual value is '36.5K USD / YEAR'. it's an edge case and won't worth the time to fix
         assertEquals(new BigDecimal("0"), dataset.signingBonus());
         assertEquals(new BigDecimal("0"), dataset.annualBonus());
         assertEquals(new BigDecimal("0"), dataset.annualStockValueBonus());
