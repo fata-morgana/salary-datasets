@@ -26,28 +26,62 @@ public class SalaryDatasetFieldHelper {
     }
 
     public static BigDecimal convertToYear(final String yearStr) {
-        if (yearStr == null || yearStr.isEmpty()) {
+        if (yearStr == null) {
             return new BigDecimal("0");
         }
-        String yearStrValid = yearStr.trim().
-                replace(",", ".");
-        BigDecimal yearAdjustment = new BigDecimal("0.0");
-        if (yearStrValid.startsWith("<")) {
-            yearStrValid = yearStrValid.substring(1, yearStrValid.length());
-            yearAdjustment = new BigDecimal("-0.5");
+        String yearStrValid = sanitizeDecimalValue(yearStr);
+        if (yearStrValid.isEmpty()) {
+            return new BigDecimal("0");
         }
-        else if (yearStrValid.startsWith(">")) {
-            yearStrValid = yearStrValid.substring(1, yearStrValid.length());
-            yearAdjustment = new BigDecimal("0.5");
-        }
-        return new BigDecimal(yearStrValid).add(yearAdjustment);
+        return adjust(yearStrValid);
     }
 
     public static BigDecimal convertMoneyField(final String moneyStr) {
-        if (moneyStr == null || moneyStr.isEmpty()) {
+        if (moneyStr == null) {
             return new BigDecimal("0");
         }
-        String parsedValue =  moneyStr.replaceAll("[^0-9\\.]", "");
-        return new BigDecimal(parsedValue);
+        String moneyStrValid =  sanitizeDecimalValue(moneyStr);
+        if (moneyStrValid.isEmpty()) {
+            return new BigDecimal("0");
+        }
+        return adjust(moneyStrValid);
+    }
+
+    //
+    private static String sanitizeDecimalValue(final String value) {
+        String cleanedValue = value.trim() .replaceAll("[^0-9\\.\\<\\>\\,]", "");
+        int lastCommaIdx = cleanedValue.lastIndexOf(",");
+        int lastDotIdx = cleanedValue.lastIndexOf(".");
+        if (lastCommaIdx > 0 && lastCommaIdx > lastDotIdx && lastDotIdx > 0) {
+            // euro style number
+            cleanedValue = cleanedValue.
+                    replace(".", "").
+                    replace(",", ".");
+        }
+        int dotOccurrence = 0;
+        for (int i = 0; i < cleanedValue.length(); i++) {
+            if (cleanedValue.charAt(i) == '.') {
+                dotOccurrence++;
+            }
+        }
+        if (dotOccurrence > 1) {
+            // look like a string
+            return "";
+        }
+        return cleanedValue.replace(",", "");
+    }
+
+    private static BigDecimal adjust(final String cleanedValue) {
+        String adjustValue = cleanedValue;
+        BigDecimal valueAdjustment = new BigDecimal("0.0");
+        if (adjustValue.startsWith("<")) {
+            adjustValue = cleanedValue.substring(1, cleanedValue.length());
+            valueAdjustment = new BigDecimal("-0.5");
+        }
+        else if (adjustValue.startsWith(">")) {
+            adjustValue = cleanedValue.substring(1, cleanedValue.length());
+            valueAdjustment = new BigDecimal("0.5");
+        }
+        return new BigDecimal(adjustValue).add(valueAdjustment);
     }
 }

@@ -13,9 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
 public class SalaryRepositoryJson implements SalaryRepository {
-    private final Logger logger = LoggerFactory.getLogger(SalaryRepositoryJson.class);
+    private static final Logger logger = LoggerFactory.getLogger(SalaryRepositoryJson.class);
     final List<SalaryDataset> datasets;
 
     public SalaryRepositoryJson(String fileName) {

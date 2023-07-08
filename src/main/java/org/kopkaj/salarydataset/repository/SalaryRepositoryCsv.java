@@ -17,9 +17,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
 public class SalaryRepositoryCsv implements SalaryRepository {
-    private final Logger logger = LoggerFactory.getLogger(SalaryRepositoryCsv.class);
+    private static final Logger logger = LoggerFactory.getLogger(SalaryRepositoryCsv.class);
     final List<SalaryDataset> datasets;
     public  SalaryRepositoryCsv(String fileName) {
         URL resource = getClass().getClassLoader().getResource(fileName);
@@ -33,8 +32,7 @@ public class SalaryRepositoryCsv implements SalaryRepository {
         }
         try {
             assert file != null;
-            try (InputStreamReader isr = new InputStreamReader(getClass().getClassLoader().getResourceAsStream(fileName));
-                    FileReader fr = new FileReader(file)) {
+            try (FileReader fr = new FileReader(file)) {
                 List<SalaryDatasetRaw> raw = new CsvToBeanBuilder(fr).
                         withType(SalaryDatasetRaw.class).
                         build().
