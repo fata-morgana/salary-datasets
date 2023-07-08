@@ -8,17 +8,16 @@ import org.kopkaj.salarydataset.model.SalaryDataset;
 import org.kopkaj.salarydataset.model.SalaryDatasetRaw;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class SalaryRepositoryCsv implements SalaryRepository {
     private final Logger logger = LoggerFactory.getLogger(SalaryRepositoryCsv.class);
     final List<SalaryDataset> datasets;
@@ -34,14 +33,16 @@ public class SalaryRepositoryCsv implements SalaryRepository {
         }
         try {
             assert file != null;
-            try (FileReader fr = new FileReader(file)) {
-                List<SalaryDatasetRaw> bean = new CsvToBeanBuilder(fr)
-                        .withType(SalaryDatasetRaw.class)
-                        .build()
-                        .parse();
-                datasets = bean.stream().
+            try (InputStreamReader isr = new InputStreamReader(getClass().getClassLoader().getResourceAsStream(fileName));
+                    FileReader fr = new FileReader(file)) {
+                List<SalaryDatasetRaw> raw = new CsvToBeanBuilder(fr).
+                        withType(SalaryDatasetRaw.class).
+                        build().
+                        parse();
+                datasets = raw.stream().
                         filter(entry -> !"".equalsIgnoreCase(entry.getTimestamp())).
-                        map(entry -> new SalaryDataset(entry)).collect(Collectors.toList());
+                        map(entry -> new SalaryDataset(entry)).
+                        collect(Collectors.toList());
             }
         } catch (FileNotFoundException e) {
             logger.error(String.format("Unable to find file %s.", fileName), e);

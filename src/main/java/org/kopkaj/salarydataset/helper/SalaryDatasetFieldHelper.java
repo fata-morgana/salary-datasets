@@ -13,6 +13,9 @@ import java.text.SimpleDateFormat;
 public class SalaryDatasetFieldHelper {
     private static final Logger logger = LoggerFactory.getLogger(SalaryDatasetFieldHelper.class);
     public static Timestamp formatTimestamp(final String timestampStr) {
+        if (timestampStr == null) {
+            return null;
+        }
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy HH:mm");
         try {
             return new Timestamp(dateFormat.parse(timestampStr).getTime());
@@ -23,7 +26,6 @@ public class SalaryDatasetFieldHelper {
     }
 
     public static BigDecimal convertToYear(final String yearStr) {
-        System.out.println("Current value is '" + yearStr + "'");
         if (yearStr == null || yearStr.isEmpty()) {
             return new BigDecimal("0");
         }

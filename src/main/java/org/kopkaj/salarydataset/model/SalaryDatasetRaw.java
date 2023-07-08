@@ -1,31 +1,44 @@
 package org.kopkaj.salarydataset.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.opencsv.bean.CsvBindByName;
 
 public class SalaryDatasetRaw {
     @CsvBindByName(column = "Timestamp")
+    @JsonProperty("Timestamp")
     private String timestamp;
     @CsvBindByName(column = "Employer")
+    @JsonProperty("Employer")
     private String employer;
     @CsvBindByName(column = "Location")
+    @JsonProperty("Location")
     private String location;
     @CsvBindByName(column = "Job Title")
+    @JsonProperty("Job Title")
     private String jobTitle;
     @CsvBindByName(column = "Years at Employer")
+    @JsonProperty("Years at Employer")
     private String yearsAtEmployer;
     @CsvBindByName(column = "Years of Experience")
+    @JsonProperty("Years of Experience")
     private String yearsAtExperience;
     @CsvBindByName(column = "Salary")
+    @JsonProperty("Salary")
     private String salary;
     @CsvBindByName(column = "Signing Bonus")
+    @JsonProperty("Signing Bonus")
     private String signingBonus;
     @CsvBindByName(column = "Annual Bonus")
+    @JsonProperty("Annual Bonus")
     private String annualBonus;
     @CsvBindByName(column = "Annual Stock Value/Bonus")
+    @JsonProperty("Annual Stock Value/Bonus")
     private String annualStockValueBonus;
     @CsvBindByName(column = "Gender")
+    @JsonProperty("Gender")
     private String gender;
     @CsvBindByName(column = "Additional Comments")
+    @JsonProperty("Additional Comments")
     private String additionalComment;
 
     public String getTimestamp() {
