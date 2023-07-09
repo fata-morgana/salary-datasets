@@ -32,7 +32,7 @@ public class SalaryRepositoryJsonTest {
         assertEquals("Raleigh, NC", dataset.location());
         assertEquals("Software Developer", dataset.jobTitle());
         assertEquals(new BigDecimal("0"), dataset.yearsAtEmployer());
-        assertEquals(new BigDecimal("18.0"), dataset.yearsAtExperience());
+        assertEquals(new BigDecimal("18.0"), dataset.yearsOfExperience());
         assertEquals(new BigDecimal("122000"), dataset.salary());
         assertEquals(new BigDecimal("0"), dataset.signingBonus());
         assertEquals(new BigDecimal("0"), dataset.annualBonus());
@@ -49,7 +49,7 @@ public class SalaryRepositoryJsonTest {
         assertEquals("San Francisco, CA", dataset.location());
         assertEquals("Systems Engineer", dataset.jobTitle());
         assertEquals(new BigDecimal("2.0"), dataset.yearsAtEmployer());
-        assertEquals(new BigDecimal("13.0"), dataset.yearsAtExperience());
+        assertEquals(new BigDecimal("13.0"), dataset.yearsOfExperience());
         assertEquals(new BigDecimal("125000"), dataset.salary());
         assertEquals(new BigDecimal("5000"), dataset.signingBonus());
         assertEquals(new BigDecimal("0"), dataset.annualBonus());
@@ -66,7 +66,7 @@ public class SalaryRepositoryJsonTest {
         assertEquals("Stockholm, Sweden", dataset.location());
         assertEquals("iOS Developer", dataset.jobTitle());
         assertEquals(new BigDecimal("0.8"), dataset.yearsAtEmployer());
-        assertEquals(new BigDecimal("8.0"), dataset.yearsAtExperience());
+        assertEquals(new BigDecimal("8.0"), dataset.yearsOfExperience());
         assertEquals(new BigDecimal("36.5"), dataset.salary()); // actual value is '36.5K USD / YEAR'. it's an edge case and won't worth the time to fix
         assertEquals(new BigDecimal("0"), dataset.signingBonus());
         assertEquals(new BigDecimal("0"), dataset.annualBonus());

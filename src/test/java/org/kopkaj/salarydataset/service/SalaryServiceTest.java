@@ -40,76 +40,76 @@ public class SalaryServiceTest {
         List<Predicate<SalaryDataset>> predicates = service.buildFilterPredicate(predicateParams);
 
         Predicate<SalaryDataset> predicate0 = predicates.get(0);
-        assertFalse(predicate0.test(buildForPredicateTest("99", "title", Gender.MALE)));
-        assertFalse(predicate0.test(buildForPredicateTest("100", "title", Gender.MALE)));
-        assertTrue(predicate0.test(buildForPredicateTest("101", "title", Gender.MALE)));
+        assertFalse(predicate0.test(buildSalaryDataset("99", "title", Gender.MALE)));
+        assertFalse(predicate0.test(buildSalaryDataset("100", "title", Gender.MALE)));
+        assertTrue(predicate0.test(buildSalaryDataset("101", "title", Gender.MALE)));
 
         Predicate<SalaryDataset> predicate1 = predicates.get(1);
-        assertFalse(predicate1.test(buildForPredicateTest("99", "title", Gender.MALE)));
-        assertTrue(predicate1.test(buildForPredicateTest("100", "title", Gender.MALE)));
-        assertTrue(predicate1.test(buildForPredicateTest("101", "title", Gender.MALE)));
+        assertFalse(predicate1.test(buildSalaryDataset("99", "title", Gender.MALE)));
+        assertTrue(predicate1.test(buildSalaryDataset("100", "title", Gender.MALE)));
+        assertTrue(predicate1.test(buildSalaryDataset("101", "title", Gender.MALE)));
 
         Predicate<SalaryDataset> predicate2 = predicates.get(2);
-        assertFalse(predicate2.test(buildForPredicateTest("99", "title", Gender.MALE)));
-        assertTrue(predicate2.test(buildForPredicateTest("100", "title", Gender.MALE)));
-        assertFalse(predicate2.test(buildForPredicateTest("101", "title", Gender.MALE)));
+        assertFalse(predicate2.test(buildSalaryDataset("99", "title", Gender.MALE)));
+        assertTrue(predicate2.test(buildSalaryDataset("100", "title", Gender.MALE)));
+        assertFalse(predicate2.test(buildSalaryDataset("101", "title", Gender.MALE)));
 
         Predicate<SalaryDataset> predicate3 = predicates.get(3);
-        assertTrue(predicate3.test(buildForPredicateTest("99", "title", Gender.MALE)));
-        assertTrue(predicate3.test(buildForPredicateTest("100", "title", Gender.MALE)));
-        assertFalse(predicate3.test(buildForPredicateTest("101", "title", Gender.MALE)));
+        assertTrue(predicate3.test(buildSalaryDataset("99", "title", Gender.MALE)));
+        assertTrue(predicate3.test(buildSalaryDataset("100", "title", Gender.MALE)));
+        assertFalse(predicate3.test(buildSalaryDataset("101", "title", Gender.MALE)));
 
         Predicate<SalaryDataset> predicate4 = predicates.get(4);
-        assertTrue(predicate4.test(buildForPredicateTest("99", "title", Gender.MALE)));
-        assertFalse(predicate4.test(buildForPredicateTest("100", "title", Gender.MALE)));
-        assertFalse(predicate4.test(buildForPredicateTest("101", "title", Gender.MALE)));
+        assertTrue(predicate4.test(buildSalaryDataset("99", "title", Gender.MALE)));
+        assertFalse(predicate4.test(buildSalaryDataset("100", "title", Gender.MALE)));
+        assertFalse(predicate4.test(buildSalaryDataset("101", "title", Gender.MALE)));
 
         Predicate<SalaryDataset> predicate5 = predicates.get(5);
-        assertTrue(predicate5.test(buildForPredicateTest("100", "SalaryMao", Gender.MALE)));
-        assertFalse(predicate5.test(buildForPredicateTest("100", "SalaryMan", Gender.MALE)));
-        assertFalse(predicate5.test(buildForPredicateTest("100", "SalaryMam", Gender.MALE)));
+        assertTrue(predicate5.test(buildSalaryDataset("100", "SalaryMao", Gender.MALE)));
+        assertFalse(predicate5.test(buildSalaryDataset("100", "SalaryMan", Gender.MALE)));
+        assertFalse(predicate5.test(buildSalaryDataset("100", "SalaryMam", Gender.MALE)));
 
         Predicate<SalaryDataset> predicate6 = predicates.get(6);
-        assertTrue(predicate6.test(buildForPredicateTest("100", "SalaryMao", Gender.MALE)));
-        assertTrue(predicate6.test(buildForPredicateTest("100", "SalaryMan", Gender.MALE)));
-        assertFalse(predicate6.test(buildForPredicateTest("100", "SalaryMam", Gender.MALE)));
+        assertTrue(predicate6.test(buildSalaryDataset("100", "SalaryMao", Gender.MALE)));
+        assertTrue(predicate6.test(buildSalaryDataset("100", "SalaryMan", Gender.MALE)));
+        assertFalse(predicate6.test(buildSalaryDataset("100", "SalaryMam", Gender.MALE)));
 
         Predicate<SalaryDataset> predicate7 = predicates.get(7);
-        assertFalse(predicate7.test(buildForPredicateTest("100", "SalaryMao", Gender.MALE)));
-        assertTrue(predicate7.test(buildForPredicateTest("100", "SalaryMan", Gender.MALE)));
-        assertFalse(predicate7.test(buildForPredicateTest("100", "SalaryMam", Gender.MALE)));
+        assertFalse(predicate7.test(buildSalaryDataset("100", "SalaryMao", Gender.MALE)));
+        assertTrue(predicate7.test(buildSalaryDataset("100", "SalaryMan", Gender.MALE)));
+        assertFalse(predicate7.test(buildSalaryDataset("100", "SalaryMam", Gender.MALE)));
 
         Predicate<SalaryDataset> predicate8 = predicates.get(8);
-        assertFalse(predicate8.test(buildForPredicateTest("100", "SalaryMao", Gender.MALE)));
-        assertTrue(predicate8.test(buildForPredicateTest("100", "SalaryMan", Gender.MALE)));
-        assertTrue(predicate8.test(buildForPredicateTest("100", "SalaryMam", Gender.MALE)));
+        assertFalse(predicate8.test(buildSalaryDataset("100", "SalaryMao", Gender.MALE)));
+        assertTrue(predicate8.test(buildSalaryDataset("100", "SalaryMan", Gender.MALE)));
+        assertTrue(predicate8.test(buildSalaryDataset("100", "SalaryMam", Gender.MALE)));
 
         Predicate<SalaryDataset> predicate9 = predicates.get(9);
-        assertFalse(predicate9.test(buildForPredicateTest("100", "SalaryMao", Gender.MALE)));
-        assertFalse(predicate9.test(buildForPredicateTest("100", "SalaryMan", Gender.MALE)));
-        assertTrue(predicate9.test(buildForPredicateTest("100", "SalaryMam", Gender.MALE)));
+        assertFalse(predicate9.test(buildSalaryDataset("100", "SalaryMao", Gender.MALE)));
+        assertFalse(predicate9.test(buildSalaryDataset("100", "SalaryMan", Gender.MALE)));
+        assertTrue(predicate9.test(buildSalaryDataset("100", "SalaryMam", Gender.MALE)));
 
 
         List<Predicate<SalaryDataset>> male1 = service.buildFilterPredicate(Map.of("gender", "M"));
-        assertTrue(male1.get(0).test(buildForPredicateTest("100", "SalaryMan", Gender.MALE)));
-        assertFalse(male1.get(0).test(buildForPredicateTest("100", "SalaryMan", Gender.FEMALE)));
+        assertTrue(male1.get(0).test(buildSalaryDataset("100", "SalaryMan", Gender.MALE)));
+        assertFalse(male1.get(0).test(buildSalaryDataset("100", "SalaryMan", Gender.FEMALE)));
         List<Predicate<SalaryDataset>> male2 = service.buildFilterPredicate(Map.of("gender", "MALE"));
-        assertTrue(male2.get(0).test(buildForPredicateTest("100", "SalaryMan", Gender.MALE)));
-        assertFalse(male2.get(0).test(buildForPredicateTest("100", "SalaryMan", Gender.FEMALE)));
+        assertTrue(male2.get(0).test(buildSalaryDataset("100", "SalaryMan", Gender.MALE)));
+        assertFalse(male2.get(0).test(buildSalaryDataset("100", "SalaryMan", Gender.FEMALE)));
 
         List<Predicate<SalaryDataset>> female1 = service.buildFilterPredicate(Map.of("gender", "F"));
-        assertFalse(female1.get(0).test(buildForPredicateTest("100", "SalaryMan", Gender.MALE)));
-        assertTrue(female1.get(0).test(buildForPredicateTest("100", "SalaryMan", Gender.FEMALE)));
+        assertFalse(female1.get(0).test(buildSalaryDataset("100", "SalaryMan", Gender.MALE)));
+        assertTrue(female1.get(0).test(buildSalaryDataset("100", "SalaryMan", Gender.FEMALE)));
         List<Predicate<SalaryDataset>> female2 = service.buildFilterPredicate(Map.of("gender", "FEMALE"));
-        assertFalse(female2.get(0).test(buildForPredicateTest("100", "SalaryMan", Gender.MALE)));
-        assertTrue(female2.get(0).test(buildForPredicateTest("100", "SalaryMan", Gender.FEMALE)));
+        assertFalse(female2.get(0).test(buildSalaryDataset("100", "SalaryMan", Gender.MALE)));
+        assertTrue(female2.get(0).test(buildSalaryDataset("100", "SalaryMan", Gender.FEMALE)));
 
         List<Predicate<SalaryDataset>> lgbtq = service.buildFilterPredicate(Map.of("gender", "LGBTQ"));
-        assertFalse(lgbtq.get(0).test(buildForPredicateTest("100", "SalaryMan", Gender.MALE)));
-        assertFalse(lgbtq.get(0).test(buildForPredicateTest("100", "SalaryMan", Gender.FEMALE)));
+        assertFalse(lgbtq.get(0).test(buildSalaryDataset("100", "SalaryMan", Gender.MALE)));
+        assertFalse(lgbtq.get(0).test(buildSalaryDataset("100", "SalaryMan", Gender.FEMALE)));
     }
 
-    private SalaryDataset buildForPredicateTest(String salary, String jobTitle, Gender gender) {
+    private SalaryDataset buildSalaryDataset(String salary, String jobTitle, Gender gender) {
         return new SalaryDataset(new Timestamp(System.currentTimeMillis()),
                 "Employer",
                 "Location",
@@ -181,5 +181,68 @@ public class SalaryServiceTest {
         assertTrue(salaryAsc.compare(data1, data2) < 0);
         Comparator<SalaryDataset> genderDesc = comparators.get(9);
         assertTrue(genderDesc.compare(data1, data2) > 0);
+    }
+
+    @Test
+    public void testShowOnlyFields1() {
+        String fields = "timestamp,employer,location,job_title,years_at_employer,years_of_experience";
+        SalaryDataset data = buildSalaryDataset("10", "job_title", Gender.MALE);
+        SalaryDataset result = service.showOnlyFields(data, fields);
+
+        assertNotNull(result.timestamp());
+        assertNotNull(result.employer());
+        assertNotNull(result.location());
+        assertNotNull(result.jobTitle());
+        assertNotNull(result.yearsAtEmployer());
+        assertNotNull(result.yearsOfExperience());
+
+        assertNull(result.salary());
+        assertNull(result.signingBonus());
+        assertNull(result.annualBonus());
+        assertNull(result.annualStockValueBonus());
+        assertNull(result.gender());
+        assertNull(result.additionalComment());
+    }
+
+    @Test
+    public void testShowOnlyFields2() {
+        String fields = "salary,signing_bonus,annual_bonus,annual_stock_value_bonus,gender,additional_comments";
+        SalaryDataset data = buildSalaryDataset("10", "job_title", Gender.MALE);
+        SalaryDataset result = service.showOnlyFields(data, fields);
+
+        assertNull(result.timestamp());
+        assertNull(result.employer());
+        assertNull(result.location());
+        assertNull(result.jobTitle());
+        assertNull(result.yearsAtEmployer());
+        assertNull(result.yearsOfExperience());
+
+        assertNotNull(result.salary());
+        assertNotNull(result.signingBonus());
+        assertNotNull(result.annualBonus());
+        assertNotNull(result.annualStockValueBonus());
+        assertNotNull(result.gender());
+        assertNotNull(result.additionalComment());
+    }
+
+    @Test
+    public void testShowOnlyFieldsShowAll() {
+        String fields = "";
+        SalaryDataset data = buildSalaryDataset("10", "job_title", Gender.MALE);
+        SalaryDataset result = service.showOnlyFields(data, fields);
+
+        assertNotNull(result.timestamp());
+        assertNotNull(result.employer());
+        assertNotNull(result.location());
+        assertNotNull(result.jobTitle());
+        assertNotNull(result.yearsAtEmployer());
+        assertNotNull(result.yearsOfExperience());
+
+        assertNotNull(result.salary());
+        assertNotNull(result.signingBonus());
+        assertNotNull(result.annualBonus());
+        assertNotNull(result.annualStockValueBonus());
+        assertNotNull(result.gender());
+        assertNotNull(result.additionalComment());
     }
 }

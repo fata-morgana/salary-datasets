@@ -21,7 +21,7 @@ public class SalaryDatasetRaw {
     private String yearsAtEmployer;
     @CsvBindByName(column = "Years of Experience")
     @JsonProperty("Years of Experience")
-    private String yearsAtExperience;
+    private String yearsOfExperience;
     @CsvBindByName(column = "Salary")
     @JsonProperty("Salary")
     private String salary;
@@ -81,12 +81,12 @@ public class SalaryDatasetRaw {
         this.yearsAtEmployer = yearsAtEmployer;
     }
 
-    public String getYearsAtExperience() {
-        return yearsAtExperience;
+    public String getYearsOfExperience() {
+        return yearsOfExperience;
     }
 
-    public void setYearsAtExperience(String yearsAtExperience) {
-        this.yearsAtExperience = yearsAtExperience;
+    public void setYearsOfExperience(String yearsOfExperience) {
+        this.yearsOfExperience = yearsOfExperience;
     }
 
     public String getSalary() {

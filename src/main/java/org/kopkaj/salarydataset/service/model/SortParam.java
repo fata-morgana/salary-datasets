@@ -1,6 +1,6 @@
 package org.kopkaj.salarydataset.service.model;
 
-public record SortParam(SortField field, SortOrder order) {
+public record SortParam(SalaryDatasetField field, SortOrder order) {
     public static SortParam parse(String singleSortParam) {
         String fieldNameParam;
         SortOrder orderParam;
@@ -16,6 +16,6 @@ public record SortParam(SortField field, SortOrder order) {
             orderParam = null;
             fieldNameParam = null;
         }
-        return new SortParam(SortField.parse(fieldNameParam), orderParam);
+        return new SortParam(SalaryDatasetField.parse(fieldNameParam), orderParam);
     }
 }

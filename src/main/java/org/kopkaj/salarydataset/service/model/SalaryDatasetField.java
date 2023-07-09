@@ -1,6 +1,7 @@
 package org.kopkaj.salarydataset.service.model;
 
-public enum SortField {
+public enum SalaryDatasetField {
+    TIMESTAMP ("timestamp"),
     EMPLOYER ("employer"),
     LOCATION ("location"),
     JOB_TITLE ("job_title"),
@@ -10,15 +11,19 @@ public enum SortField {
     SIGNING_BONUS ("signing_bonus"),
     ANNUAL_BONUS ("annual_bonus"),
     ANNUAL_STOCK_VALUE_BONUS ("annual_stock_value_bonus"),
-    GENDER ("gender");
+    GENDER ("gender"),
+    ADDITIONAL_COMMENTS ("additional_comments");
 
     private final String fieldName;
-    SortField(String fieldName) {
+    SalaryDatasetField(String fieldName) {
         this.fieldName = fieldName;
     }
 
-    public static SortField parse(final String fieldName) {
-        if (fieldName.equalsIgnoreCase(EMPLOYER.fieldName)) {
+    public static SalaryDatasetField parse(final String fieldName) {
+        if (fieldName.equalsIgnoreCase(TIMESTAMP.fieldName)) {
+            return TIMESTAMP;
+        }
+        else if (fieldName.equalsIgnoreCase(EMPLOYER.fieldName)) {
             return EMPLOYER;
         }
         else if (fieldName.equalsIgnoreCase(LOCATION.fieldName)) {
@@ -47,6 +52,9 @@ public enum SortField {
         }
         else if (fieldName.equalsIgnoreCase(GENDER.fieldName)) {
             return GENDER;
+        }
+        else if (fieldName.equalsIgnoreCase(ADDITIONAL_COMMENTS.fieldName)) {
+            return ADDITIONAL_COMMENTS;
         }
         else {
             // skip sorting this field is fieldName is invalid. should not throw 500 error if fieldName is misspelled
