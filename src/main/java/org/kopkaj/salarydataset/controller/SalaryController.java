@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("salary")
@@ -21,7 +21,7 @@ public class SalaryController {
 
     private static final Logger logger = LoggerFactory.getLogger(SalaryController.class);
     @GetMapping("job_data")
-    public @ResponseBody List<SalaryDataset> get(@RequestParam Map<String,String> allRequestParams) {
+    public @ResponseBody List<SalaryDataset> get(@RequestParam LinkedHashMap<String,String> allRequestParams) {
         logger.info("request: " + allRequestParams);
         List<SalaryDataset> result = salaryService.queryWithParameters(allRequestParams);
         logger.info("start of response...");

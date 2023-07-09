@@ -3,15 +3,22 @@ package org.kopkaj.salarydataset.service;
 import org.kopkaj.salarydataset.model.Gender;
 import org.kopkaj.salarydataset.model.SalaryDataset;
 import org.kopkaj.salarydataset.repository.SalaryRepository;
-import org.springframework.stereotype.Service;
+import org.kopkaj.salarydataset.service.model.SortField;
+import org.kopkaj.salarydataset.service.model.SortOrder;
+import org.kopkaj.salarydataset.service.model.SortParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.Arrays.stream;
 
 public class SalaryService {
+    private static final Logger logger = LoggerFactory.getLogger(SalaryService.class);
     private final SalaryRepository repository;
 
     public SalaryService(SalaryRepository salaryRepository) {
@@ -20,11 +27,17 @@ public class SalaryService {
 
 
 
-    public List<SalaryDataset> queryWithParameters(Map<String, String> queryParam) {
-        return null;
+    public List<SalaryDataset> queryWithParameters(LinkedHashMap<String, String> queryParams) {
+        Optional<Predicate<SalaryDataset>> predicates = buildFilterPredicate(queryParams).stream().reduce(Predicate::and);
+        Optional<Comparator<SalaryDataset>> comparators = buildSortingComparator(queryParams.get("sort")).reduce(Comparator::thenComparing);
+        return repository.
+                getAll().
+                stream().
+                filter(predicates.orElse(other -> true)).
+                sorted(comparators.orElse((a,b) -> 0)).collect(Collectors.toList());
     }
 
-    protected List<Predicate<SalaryDataset>> buildPredicate(Map<String, String> queryParam) {
+    protected List<Predicate<SalaryDataset>> buildFilterPredicate(Map<String, String> queryParam) {
         List<Predicate<SalaryDataset>> predicates = new ArrayList<>();
         for(Map.Entry<String, String> entry : queryParam.entrySet()) {
             if (entry.getKey().equalsIgnoreCase("salary[gt]")) {
@@ -75,5 +88,57 @@ public class SalaryService {
             }
         }
         return predicates;
+    }
+
+    protected Stream<Comparator<SalaryDataset>> buildSortingComparator(String sortParams) {
+        if (sortParams == null || sortParams.isEmpty()) {
+            return Stream.empty();
+        }
+        String[] paramArray = sortParams.split(",");
+        Stream<SortParam> sortParamList = Arrays.stream(paramArray).
+                map(SortParam::parse).
+                filter(param -> param.field() != null || param.order() != null);
+        return sortParamList.map(singleSortParam -> maybeSortDesc(buildComparatorFromSortField(singleSortParam.field()), singleSortParam.order()));
+    }
+
+    private Comparator<SalaryDataset> buildComparatorFromSortField(SortField sortField) {
+        if(sortField == SortField.EMPLOYER) {
+            return Comparator.comparing(SalaryDataset::employer);
+        }
+        else if(sortField == SortField.LOCATION) {
+            return Comparator.comparing(SalaryDataset::location);
+        }
+        else if(sortField == SortField.JOB_TITLE) {
+            return Comparator.comparing(SalaryDataset::jobTitle);
+        }
+        else if(sortField == SortField.YEARS_AT_EMPLOYER) {
+            return Comparator.comparing(SalaryDataset::yearsAtEmployer);
+        }
+        else if(sortField == SortField.YEARS_OF_EXPERIENCE) {
+            return Comparator.comparing(SalaryDataset::yearsAtExperience);
+        }
+        else if(sortField == SortField.SALARY) {
+            return Comparator.comparing(SalaryDataset::salary);
+        }
+        else if(sortField== SortField.SIGNING_BONUS) {
+            return Comparator.comparing(SalaryDataset::signingBonus);
+        }
+        else if(sortField == SortField.ANNUAL_BONUS) {
+            return Comparator.comparing(SalaryDataset::annualBonus);
+        }
+        else if(sortField == SortField.ANNUAL_STOCK_VALUE_BONUS) {
+            return Comparator.comparing(SalaryDataset::annualStockValueBonus);
+        }
+        else if(sortField == SortField.GENDER) {
+            return Comparator.comparing(SalaryDataset::gender);
+        }
+        else {
+            // noop comparator
+            return Comparator.comparing((a) -> true);
+        }
+    }
+
+    private Comparator<SalaryDataset> maybeSortDesc(Comparator<SalaryDataset> comparator, SortOrder sortOrder) {
+        return sortOrder == SortOrder.DESC ? comparator.reversed() : comparator;
     }
 }
