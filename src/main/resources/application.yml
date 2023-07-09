@@ -1,0 +1,8 @@
+server:
+  tomcat:
+    relaxed-query-chars: "[,]"
+
+dataset:
+  source: "json"
+  csv: "data/salary_survey-3.csv"
+  json: "data/salary_survey-3.json"
